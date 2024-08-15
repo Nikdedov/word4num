@@ -1,0 +1,30 @@
+[project]
+name = "word4num"
+version = "0.0.1"
+authors = [
+  { name="Nikdedov", email="nik.dedov@gmail.com" },
+]
+description = "Small library for encoding numbers to words and decoding it back."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["encode number", "decode words", "word number converter", "what3words"]
+
+[project.urls]
+Homepage = "https://github.com/Nikdedov/word4num"
+Issues = "https://github.com/Nikdedov/word4num/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = [
+  "src/*"
+]
+[tool.hatch.build.targets.wheel]
+packages = ["src/word4num"]
