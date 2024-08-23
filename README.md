@@ -97,7 +97,7 @@ Chunking: The brain naturally chunks information for easier recall. While number
     Can be implemented as a simple local DNS for temporarily used IP addresses, JFF (e.g. web browser). Ports can be supported using 4 words.
 
 ## Words dictionary generation
-1. Enlgish words were generated using NLTK using Brown Corpus.
+1. English words were generated using NLTK using Brown Corpus.
 2. Then stop words, proper names, plural words, abbreviations were filtered out to keep only nouns, verbs, adjectives, and adverbs.
 3. Words frequencies were used to order list of words.
 4. The resulting list was separated to 3,4,5,6,7,8,9,10 letters words to use shortest in some cases.

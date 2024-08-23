@@ -1,9 +1,11 @@
 from .dicts import WordMap
+from .letters import LetterMap
 from typing import Callable
 
 
-class W4NConverter(WordMap):
-    allowed_letters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+class W4NConverter(WordMap , LetterMap):
+    digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    special_symbols=['#','?']
 
     def __init__(self, number_mask: str, lang_symbol: str, words_base: int,
                  modification_to: Callable[[str], str] = lambda x: x,
@@ -12,16 +14,20 @@ class W4NConverter(WordMap):
         self.modification_to = modification_to
         self.modification_from = modification_from
         self.number_mask = number_mask
+        self.allowed_letters = digits + self.letters
         self.max_number = self._find_max_number(number_mask)
         _, self.words_number = self.encode_number(self.modification_to(self.max_number))
 
-    @staticmethod
-    def _find_max_number(number_mask: str) -> str:
+    def _find_max_number(self , number_mask: str) -> str:
         max_text_number = ''
         for letter in number_mask:
             if letter == '#':
                 max_text_number += '9'
-            elif letter in W4NConverter.allowed_letters + ['.']:
+            elif letter == '?':
+                max_text_number += str(self.max_letter_index)
+            elif letter.upper() in self.letters:
+                max_text_number += self.get_number(letter)
+            elif letter in W4NConverter.digits + ['.']:
                 max_text_number += letter
         return max_text_number
 
@@ -41,14 +47,14 @@ class W4NConverter(WordMap):
     def encode_number(self, number_to_encode: str) -> tuple[list[str], int]:
         number_to_encode = self.modification_to(number_to_encode)
         cleaned_number_to_encode = ''
-        for character in range(len(self.number_mask)):
+        for character in range(min(len(self.number_mask),len(number_to_encode))):
             reversed_character = -character - 1
-            if self.number_mask[reversed_character] in W4NConverter.allowed_letters + ['#']:
-                if (character < len(number_to_encode) and number_to_encode[reversed_character]
-                        in W4NConverter.allowed_letters):
-                    cleaned_number_to_encode = number_to_encode[reversed_character] + cleaned_number_to_encode
-                else:
-                    cleaned_number_to_encode = '0' + cleaned_number_to_encode
+            if self.number_mask[reversed_character] in self.allowed_letters + W4NConverter.special_symbols:
+                if number_to_encode[reversed_character] in self.allowed_letters:
+                    if number_to_encode[reversed_character].upper() in self.letters:
+                        cleaned_number_to_encode = self.get_number(number_to_encode[reversed_character]) + cleaned_number_to_encode
+                    else:
+                        cleaned_number_to_encode = number_to_encode[reversed_character] + cleaned_number_to_encode
 
         return self._find_words_for_number(int(cleaned_number_to_encode))
 
