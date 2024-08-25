@@ -11,11 +11,14 @@
 import src.word4num
 import re
 
-converter = src.word4num.W4NConverter('###############', 'en', 6, lambda x: re.sub(r'[^0-9]', '', x),
+converter = src.word4num.W4NConverter('###############',
+                                      'en',
+                                      6,
+                                      lambda x: re.sub(r'[^0-9]', '', x),
                                       lambda x: '+' + str(int(x)))
 
 test_phone = '(+44) (0)20 7930 4832'
-
+print(test_phone)
 words = converter.encode_number(test_phone)
 print(words)
 result_phone = converter.decode_words(words[0])
