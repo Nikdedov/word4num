@@ -13,6 +13,7 @@ class LetterMap:
             self.letter_number_map[LetterMap.language_letters[lang_symbol][letter_i]] = letter_i
             self.number_letter_map[letter_i] = LetterMap.language_letters[lang_symbol][letter_i]
 
+    # Get number for provided letter, which could be digit or letter from configured language letters
     def get_number(self, letter: str, mixed: bool = False) -> str:
         if letter.upper() not in self.letter_number_map.keys():
             number = letter
@@ -21,6 +22,8 @@ class LetterMap:
             number = str(self.letter_number_map[letter.upper()] + shift)
         return number if len(number) > 1 else '0' + number
 
+    # Get a combination of maximum digit for each position for possible maximum number
+    # based on configured language letters
     def get_max_number(self, mixed: bool = False) -> str:
         if mixed:
             updated_max_letter_index = str(self.max_letter_index + 10)
@@ -28,6 +31,7 @@ class LetterMap:
             updated_max_letter_index = str(self.max_letter_index)
         return updated_max_letter_index[0] + '9' * (len(updated_max_letter_index) - 1)
 
+    # Get letter for provided number, letter could be digit or from configured language letters
     def get_letter(self, number: str, mixed: bool = False) -> str:
         if mixed:
             if int(number) < 10:

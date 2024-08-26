@@ -20,16 +20,16 @@ def modification_from(string_number, adjustment, precise, decimal):
     return string_number
 
 
-precise=2
-decimal=2
+precise=5
+decimal=3
 latitude_converter = src.word4num.W4NConverter('199.'+'9'*decimal,
                                                'en',
-                                               10,
+                                               3,
                                                lambda x: modification_to(x, 90,precise,decimal),
                                                lambda x: modification_from(x, 90,precise,decimal))
 longitude_converter = src.word4num.W4NConverter('399.'+'9'*decimal,
                                                 'en',
-                                                10,
+                                                3,
                                                 lambda x: modification_to(x, 180,precise,decimal),
                                                 lambda x: modification_from(x, 180,precise,decimal))
 

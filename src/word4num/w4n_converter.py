@@ -20,6 +20,7 @@ class W4NConverter(WordMap, LetterMap):
         self.notation = self._generate_notation()
         _, self.words_number = self.encode_number(self.modification_to(self.max_number))
 
+    # Define max number to calculate a longest possible sequence of words for provided configuration
     def _find_max_number(self, number_mask: str) -> str:
         max_text_number = ''
         for letter in number_mask:
@@ -35,6 +36,7 @@ class W4NConverter(WordMap, LetterMap):
                 max_text_number += letter
         return max_text_number
 
+    # Find a sequence of words for converted number
     def _find_words_for_number(self, number: int) -> tuple[list[str], int]:
         words_number = 0
         result_words = []
@@ -48,6 +50,7 @@ class W4NConverter(WordMap, LetterMap):
             words_number += 1
         return result_words, words_number
 
+    # Entry point for encoding initial digits/letters to words
     def encode_number(self, number_to_encode: str) -> tuple[list[str], int]:
         number_to_encode = self.modification_to(number_to_encode)
         cleaned_number_to_encode = ''
@@ -70,6 +73,7 @@ class W4NConverter(WordMap, LetterMap):
 
         return self._find_words_for_number(self._number_convert_to(cleaned_number_to_encode))
 
+    # Calculate number using provided words
     def _find_number_for_words(self, words_to_decode: list[str]) -> int:
         number = 0
         skipped = 0
@@ -84,6 +88,8 @@ class W4NConverter(WordMap, LetterMap):
                 number = number * self.get_map_length() + self.word_to_num[words_to_decode[reversed_word_i]]
         return number
 
+    # Entry point for decoding words.
+    # To get the right result, the configuration of W4NConverter should be the same as used for encoding
     def decode_words(self, words_to_decode: list[str]) -> str:
         number = self._number_convert_from(self._find_number_for_words(words_to_decode))
         number_character = 0
@@ -111,6 +117,7 @@ class W4NConverter(WordMap, LetterMap):
                 masked_number = self.number_mask[reversed_character] + masked_number
         return self.modification_from(masked_number)
 
+    # Calculate the sequence of possible combinations for each position in number
     def _generate_notation(self) -> list[int]:
         notation_list = [1]
         shift = 0
@@ -125,6 +132,8 @@ class W4NConverter(WordMap, LetterMap):
                 shift += 1
         return notation_list
 
+    # Convert a number with different bases for each digit to base-10
+    # That helps reduce the number of possible options and create a shorter sequence of words.
     def _number_convert_to(self, number: str) -> int:
         result_number = 0
         for digit_i in range(len(number)):
@@ -132,6 +141,7 @@ class W4NConverter(WordMap, LetterMap):
             result_number += int(number[reversed_digit_i]) * self.notation[reversed_digit_i]
         return result_number
 
+    # Convert a base-10 number to a number specified by notation
     def _number_convert_from(self, number: int) -> str:
         result_number = ''
         for notation_i in self.notation:

@@ -96,6 +96,9 @@ Chunking: The brain naturally chunks information for easier recall. While number
 4. examples/IPv4toWords.py :
     Can be implemented as a simple local DNS for temporarily used IP addresses, JFF (e.g. web browser). Ports can be supported using 4 words.
 
+5. examples/PostcodeWords.py :
+    Encoding UK postcodes into 3 words that are easy to remember
+
 ## Words dictionary generation
 1. English words were generated using NLTK using Brown Corpus.
 2. Then stop words, proper names, plural words, abbreviations were filtered out to keep only nouns, verbs, adjectives, and adverbs.
