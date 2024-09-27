@@ -16,7 +16,7 @@ converter = src.word4num.W4NConverter('029########',
                                       4,
                                       lambda x: re.sub(r'[^0-9+]', '', x))
 
-test_phone = '(020) 1234 1234'
+test_phone = '(027) 4193 2856'
 print(test_phone)
 words = converter.encode_number(test_phone)
 print(words)

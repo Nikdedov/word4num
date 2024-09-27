@@ -20,7 +20,7 @@ class W4NConverter(WordMap, LetterMap):
         self.notation = self._generate_notation()
         _, self.words_number = self.encode_number(self.modification_to(self.max_number))
 
-    # Define max number to calculate a longest possible sequence of words for provided configuration
+    # Define max number to calculate the longest possible sequence of words for provided configuration
     def _find_max_number(self, number_mask: str) -> str:
         max_text_number = ''
         for letter in number_mask:
@@ -30,9 +30,7 @@ class W4NConverter(WordMap, LetterMap):
                 max_text_number += self.get_max_number(False)
             elif letter == '*':
                 max_text_number += self.get_max_number(True)
-            elif letter.upper() in self.letters:
-                max_text_number += self.get_number(letter, False)
-            elif letter in W4NConverter.digits + ['.']:
+            else:
                 max_text_number += letter
         return max_text_number
 

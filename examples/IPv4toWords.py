@@ -21,11 +21,11 @@ def modification_from(string_number):
 
 converter = src.word4num.W4NConverter('299.299.299.299',
                                       'en',
-                                      6,
+                                      5,
                                       modification_to,
                                       modification_from)
 
-test_ip = '92.132.10.22'
+test_ip = '255.255.255.255'
 print(test_ip)
 words = converter.encode_number(test_ip)
 print(words)

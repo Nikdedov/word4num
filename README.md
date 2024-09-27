@@ -80,13 +80,14 @@ converter.get_map_length()
 1. examples/4WordsGeo.py :
     Encoding and decoding location in decimal degrees - can be used in new possible substitution of What3Words
     Their solution has problems in dictionary with ambiguously sound words and being proprietary - https://en.wikipedia.org/wiki/What3words
-    Use of 4 short and simple words could work better - room for discussion
-
+    Use of 4 short and simple words could work better - room for discussion.
+    Example: 10.000000, 0.000001 -> ['slit', 'elk', 'high', 'bent']
 2. examples/LocalPhoneWords.py :
-   Encoding local telephone numbers in UK format into words
-
+    Encoding local telephone numbers in UK format into words.
+    Example: (027) 4193 2856 -> ['lazy', 'pin', 'desk']
 3. examples/IntPhoneWords.py :
-   Encoding international telephone numbers into words
+    Encoding international telephone numbers into words
+    Example: (+44) (0)20 7930 4832 -> ['seaman', 'savory', 'beckon', 'say']
 
 Reasons for 2 and 3 example:
 Words Carry Meaning: Words have meaning, context, and imagery associated with them, making them easier to remember. For example, words like "sun", "car", and "tree" evoke clear mental images or associations.
@@ -95,9 +96,10 @@ Chunking: The brain naturally chunks information for easier recall. While number
 
 4. examples/IPv4toWords.py :
     Can be implemented as a simple local DNS for temporarily used IP addresses, JFF (e.g. web browser). Ports can be supported using 4 words.
-
+    Example: 255.255.255.255 -> ['mem', 'lamb', 'oft']
 5. examples/PostcodeWords.py :
     Encoding UK postcodes into 3 words that are easy to remember
+    Example: SE10 0TY -> ['bulked', 'rip', 'deal']
 
 ## Words dictionary generation
 1. English words were generated using NLTK using Brown Corpus.
