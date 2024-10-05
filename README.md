@@ -81,13 +81,13 @@ converter.get_map_length()
     Encoding and decoding location in decimal degrees - can be used in new possible substitution of What3Words
     Their solution has problems in dictionary with ambiguously sound words and being proprietary - https://en.wikipedia.org/wiki/What3words
     Use of 4 short and simple words could work better - room for discussion.
-    Example: 10.000000, 0.000001 -> ['slit', 'elk', 'high', 'bent']
+    Example: 10.000000, 0.000001 -> ['timid', 'made', 'tip', 'barn']
 2. examples/LocalPhoneWords.py :
     Encoding local telephone numbers in UK format into words.
-    Example: (027) 4193 2856 -> ['lazy', 'pin', 'desk']
+    Example: (027) 4193 2856 -> ['mew', 'atom', 'pick']
 3. examples/IntPhoneWords.py :
     Encoding international telephone numbers into words
-    Example: (+44) (0)20 7930 4832 -> ['seaman', 'savory', 'beckon', 'say']
+    Example: (+44) (0)20 7930 4832 -> ['prim', 'enjoy', 'feuds', 'got']
 
 Reasons for 2 and 3 example:
 Words Carry Meaning: Words have meaning, context, and imagery associated with them, making them easier to remember. For example, words like "sun", "car", and "tree" evoke clear mental images or associations.
@@ -96,20 +96,18 @@ Chunking: The brain naturally chunks information for easier recall. While number
 
 4. examples/IPv4toWords.py :
     Can be implemented as a simple local DNS for temporarily used IP addresses, JFF (e.g. web browser). Ports can be supported using 4 words.
-    Example: 255.255.255.255 -> ['mem', 'lamb', 'oft']
+    Example: 255.255.255.255 -> ['sting', 'year', 'soy']
 5. examples/PostcodeWords.py :
     Encoding UK postcodes into 3 words that are easy to remember
-    Example: SE10 0TY -> ['bulked', 'rip', 'deal']
+    Example: SE10 0TY -> ['neuron', 'toy', 'game']
 
 ## Words dictionary generation
 1. English words were generated using NLTK using Brown Corpus.
 2. Then stop words, proper names, plural words, abbreviations were filtered out to keep only nouns, verbs, adjectives, and adverbs.
 3. Words frequencies were used to order list of words.
-4. The resulting list was separated to 3,4,5,6,7,8,9,10 letters words to use shortest in some cases.
+4. The resulting list was separated to 3,4,5,6,7,8,9,10... letters words to use shortest in some cases.
 
 ## TBD
-1. Find out if support is needed for longer words
-2. Support other languages
-3. Add checks and exceptions
-4. Add unit tests
-5. 
+1. Support other languages
+2. Add checks and exceptions
+3. Add unit tests
